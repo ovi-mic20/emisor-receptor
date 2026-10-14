@@ -53,11 +53,10 @@
             const targetDiv = document.getElementById('target-div');
             const spokenMessage = document.getElementById('spoken-message');
 
-            function renderMessage(message, customStyle = '') {
+            function renderMessage(message) {
                 const text = String(message ?? '').trim() || 'Sin mensaje';
                 const words = text.split(/\s+/);
 
-                targetDiv.style.cssText = customStyle;
                 targetDiv.replaceChildren();
                 spokenMessage.textContent = text;
 
@@ -95,7 +94,7 @@
             window.Echo.channel('style-channel')
                 .listen('.RemoteStyleUpdate', (e) => {
                     // El nombre con punto (.) escucha usando broadcastAs() 
-                    renderMessage(e.newText, e.newStyle ?? '');
+                    renderMessage(e.newText);
                 });
         });
     </script>

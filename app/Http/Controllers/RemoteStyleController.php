@@ -19,14 +19,10 @@ class RemoteStyleController extends Controller
     public function emitir(Request $request)
     {
         $data = $request->validate([
-            'newText'  => ['required', 'string'],
-            'newStyle' => ['nullable', 'string'],
+            'newText' => ['required', 'string'],
         ]);
 
-        broadcast(new RemoteStyleUpdate(
-            $data['newText'],
-            $data['newStyle'] ?? ''
-        ));
+        broadcast(new RemoteStyleUpdate($data['newText']));
 
         return back()->with('ok', 'Mensaje emitido correctamente.');
     }

@@ -8,12 +8,10 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class RemoteStyleUpdate implements ShouldBroadcast 
 { 
     public string $newText; 
-    public string $newStyle; 
  
-    public function __construct(string $newText, string $newStyle) 
+    public function __construct(string $newText)
     { 
         $this->newText  = $newText; 
-        $this->newStyle = $newStyle; 
     }
      public function broadcastOn(): array 
     { 
