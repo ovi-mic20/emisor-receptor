@@ -41,10 +41,6 @@
                             <label class="field-label" for="newText">Mensaje de la señal</label>
                             <input class="space-input" id="newText" type="text" name="newText" placeholder="Ej: Ahora atendiendo: A-037" required>
                         </div>
-                        <div>
-                            <label class="field-label" for="newStyle">Estilo CSS (opcional)</label>
-                            <textarea class="space-textarea" id="newStyle" name="newStyle" rows="4" placeholder="color: #a8f0d5; font-size: 28px; text-align: center;"></textarea>
-                        </div>
                     </div>
                     <button class="transmit-button" type="submit">
                         <span class="button-orbit" aria-hidden="true"></span>
