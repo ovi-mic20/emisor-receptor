@@ -44,6 +44,217 @@
             .game-button { padding: 9px 10px; }
             .game-hint { bottom: 98px; left: 14px; }
         }
+
+        body {
+            background:
+                radial-gradient(ellipse at 50% 110%, rgba(31, 103, 123, .18), transparent 48%),
+                radial-gradient(ellipse at 10% 8%, rgba(74, 75, 137, .16), transparent 36%),
+                var(--game-ink);
+        }
+
+        .game-title,
+        .hud-stat,
+        .game-button,
+        .game-hint,
+        .touch-button {
+            border-color: rgba(148, 210, 224, .25);
+            background: linear-gradient(145deg, rgba(17, 34, 48, .9), rgba(7, 15, 24, .84));
+            box-shadow: 0 12px 34px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .04);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .game-title {
+            padding: 12px 16px;
+            border-radius: 12px;
+            border-left: 2px solid var(--game-cyan);
+            letter-spacing: .12em;
+        }
+
+        .game-title span {
+            margin-top: 7px;
+            letter-spacing: .08em;
+        }
+
+        .hud-stats { gap: 10px; }
+        .hud-stat {
+            min-width: 100px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            color: var(--game-muted);
+            letter-spacing: .12em;
+        }
+        .hud-stat strong {
+            margin-top: 5px;
+            font-size: 21px;
+            text-shadow: 0 0 18px rgba(105, 227, 220, .3);
+        }
+
+        .game-button {
+            min-height: 42px;
+            padding: 0 16px;
+            border-radius: 10px;
+            transition: transform .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease;
+        }
+        .game-button:hover,
+        .game-button:focus-visible {
+            border-color: var(--game-cyan);
+            box-shadow: 0 0 24px rgba(105, 227, 220, .12);
+            outline: none;
+        }
+        .game-button:active { transform: translateY(1px); }
+
+        .game-hint {
+            padding: 11px 15px;
+            border: 1px solid var(--game-line);
+            border-radius: 12px;
+            line-height: 1.9;
+        }
+
+        .touch-button {
+            border-radius: 50%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .06);
+            transition: background .15s ease, transform .15s ease, border-color .15s ease;
+        }
+        .touch-button:active {
+            transform: scale(.95);
+            border-color: var(--game-cyan);
+            background: rgba(54, 129, 140, .5);
+        }
+        .touch-fire {
+            border-color: rgba(105, 227, 220, .58);
+            box-shadow: 0 0 26px rgba(105, 227, 220, .12), 0 8px 24px rgba(0, 0, 0, .3);
+        }
+
+        @media (max-width: 560px) {
+            .game-hud { gap: 10px; }
+            .game-title { padding: 10px 13px; }
+            .hud-stats { gap: 6px; }
+            .hud-stat { min-width: 76px; padding: 8px 10px; }
+            .hud-stat strong { font-size: 18px; }
+            .game-button { min-height: 38px; border-radius: 9px; }
+            .game-hint { padding: 8px 11px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .game-button, .touch-button { transition: none; }
+        }
+
+        .game-hud {
+            inset: 18px 20px auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .game-title {
+            padding: 12px 16px;
+            border: 1px solid var(--game-line);
+            border-left: 2px solid var(--game-pink);
+            border-radius: 12px;
+            background: linear-gradient(145deg, rgba(17, 34, 48, .92), rgba(7, 15, 24, .88));
+            box-shadow: 0 14px 38px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .04);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            font-size: 12px;
+            letter-spacing: .12em;
+        }
+
+        .game-title span {
+            margin-top: 7px;
+            color: var(--game-muted);
+            font-size: 10px;
+            letter-spacing: .08em;
+        }
+
+        .hud-stats { gap: 9px; }
+        .hud-stat {
+            min-width: 94px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            letter-spacing: .12em;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 7px;
+            pointer-events: auto;
+        }
+
+        .game-button {
+            min-height: 42px;
+            padding: 0 14px;
+            border-radius: 9px;
+            color: var(--game-text);
+            text-decoration: none;
+            letter-spacing: .1em;
+        }
+
+        .game-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-hint {
+            z-index: 2;
+            bottom: clamp(16px, 3vw, 28px);
+            left: clamp(14px, 3vw, 30px);
+            display: grid;
+            gap: 5px;
+            padding: 13px 16px;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+
+        .hint-title {
+            color: var(--game-cyan);
+            letter-spacing: .14em;
+        }
+
+        .game-hint kbd {
+            padding: 2px 5px;
+            border: 1px solid rgba(164, 218, 224, .2);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, .04);
+            color: var(--game-text);
+            font: inherit;
+        }
+
+        .touch-controls {
+            z-index: 3;
+            right: 14px;
+            bottom: max(14px, env(safe-area-inset-bottom));
+            left: 14px;
+        }
+
+        .touch-button { pointer-events: auto; }
+
+        @media (max-width: 620px) {
+            .game-hud {
+                inset: 12px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+            }
+
+            .game-title { grid-column: 1; min-width: 0; padding: 10px 13px; }
+            .hud-stats { grid-column: 1 / -1; gap: 6px; }
+            .hud-stat { min-width: 76px; padding: 7px 9px; border-radius: 8px; }
+            .hud-stat strong { font-size: 17px; }
+            .game-actions { grid-column: 2; grid-row: 1; margin-left: auto; }
+            .game-button { min-height: 38px; padding: 0 10px; border-radius: 8px; }
+            .game-hint { bottom: 96px; left: 12px; gap: 4px; padding: 9px 11px; }
+            .touch-controls { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); left: 12px; }
+        }
+
+        @media (max-width: 380px) {
+            .game-hint { font-size: 9px; }
+            .game-button { padding: 0 8px; font-size: 9px; }
+            .touch-button { width: 48px; height: 48px; }
+            .touch-fire { width: 68px; height: 68px; }
+        }
     </style>
 </head>
 <body>
@@ -51,12 +262,19 @@
     <header class="game-hud">
         <h1 class="game-title">Defensa orbital<span>Sector 07 / Supervivencia</span></h1>
         <div class="hud-stats" aria-live="polite">
-            <div class="hud-stat">Puntos<strong id="score">0</strong></div>
-            <div class="hud-stat">Vidas<strong id="lives">3</strong></div>
+            <div class="hud-stat"><span>Puntos</span><strong id="score">0</strong></div>
+            <div class="hud-stat"><span>Vidas</span><strong id="lives">3</strong></div>
         </div>
-        <button class="game-button" id="restart" type="button">Reiniciar</button>
+        <nav class="game-actions" aria-label="Acciones del juego">
+            <a class="game-button game-back" href="{{ route('inicio') }}">Inicio</a>
+            <button class="game-button" id="restart" type="button">Reiniciar</button>
+        </nav>
     </header>
-    <div class="game-hint">MOVER: FLECHAS / WASD<br>DISPARAR: ESPACIO</div>
+    <div class="game-hint">
+        <span class="hint-title">Controles</span>
+        <span><kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> / WASD · Mover</span>
+        <span><kbd>Espacio</kbd> · Disparar</span>
+    </div>
     <div class="touch-controls" aria-label="Controles táctiles">
         <div class="move-controls">
             <button class="touch-button" type="button" data-control="ArrowLeft" aria-label="Mover a la izquierda">&#8592;</button>

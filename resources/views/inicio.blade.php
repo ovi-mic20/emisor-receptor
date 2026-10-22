@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elige tu misión</title>
+    <title>Elige tu camino en el espacio</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         :root {
@@ -84,26 +84,23 @@
 </head>
 <body>
     <main class="menu">
-        <p class="eyebrow">Emisor / Receptor · Sector 07</p>
-        <h1>Elige tu misión</h1>
+        <p class="eyebrow">Emitiendo en el Sector 07</p>
+        <h1>Elige tu camino en el espacio</h1>
         <p class="intro">Prepárate, piloto. Entra a una partida individual o abre la sala de campaña para ver a los demás jugadores en acción.</p>
 
         <section class="modes" aria-label="Modos de juego">
             <article class="mode">
-                <span class="mode-index">01 / SUPERVIVENCIA</span>
+                <span class="mode-index">SUPERVIVENCIA</span>
                 <h2>Modo individual</h2>
                 <p>Controla tu nave, esquiva los meteoritos y dispara para sobrevivir todo lo posible.</p>
                 <a class="mode-link" href="{{ route('jugador') }}">Jugar individual</a>
             </article>
             <article class="mode mode-campaign">
-                <span class="mode-index">02 / MULTIJUGADOR</span>
+                <span class="mode-index">MULTIJUGADOR</span>
                 <h2>Modo campaña</h2>
-                <p>Entra a la sala de combate y sigue en vivo las naves de los jugadores conectados.</p>
-                <a class="mode-link" href="{{ route('enemigo') }}">Abrir campaña</a>
+                <p>Enfréntate en tiempo real a otro piloto, ataca su nave y esquiva los meteoritos de la zona.</p>
+                <a class="mode-link" href="{{ route('campana') }}">Abrir campaña</a>
             </article>
         </section>
-
-        <p class="footnote">En campaña, abre también tu nave desde la sala para aparecer en el enfrentamiento.</p>
-    </main>
 </body>
 </html>
