@@ -7,10 +7,20 @@ use App\Events\Nave;
 
 class NaveController extends Controller
 {
+    public function inicio()
+    {
+        return view('inicio');
+    }
+
     // Página del jugador (emisor): controla su nave
     public function jugador()
     {
         return view('jugador');
+    }
+
+    public function enemigo()
+    {
+        return view('enemigo');
     }
 
     // Página del espectador (receptor): ve todas las naves
@@ -41,4 +51,3 @@ class NaveController extends Controller
         return response()->json(['ok' => true]);
     }
 }
-
