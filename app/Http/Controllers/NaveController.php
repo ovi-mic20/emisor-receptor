@@ -18,11 +18,6 @@ class NaveController extends Controller
         return view('jugador');
     }
 
-    public function enemigo()
-    {
-        return view('enemigo');
-    }
-
     public function campana()
     {
         return view('campana');

@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const processedRelations = new Set();
     const stars = [];
     const pendingImpacts = [];
+    let pendingShot = [];
     let pendingRelation = null;
     let incomingRequest = null;
     let allianceAwaitingResponse = false;
