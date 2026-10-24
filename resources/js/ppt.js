@@ -3,11 +3,6 @@ const mode = page.dataset.mode;
 
 if (mode) {
     const choices = ['piedra', 'papel', 'tijera'];
-    const symbols = {
-        piedra: '✊',
-        papel: '✋',
-        tijera: '✌️',
-    };
     const labels = {
         piedra: 'Piedra',
         papel: 'Papel',
@@ -24,9 +19,44 @@ if (mode) {
     const playAgain = document.querySelector('#play-again');
     const choiceButtons = [...document.querySelectorAll('[data-choice]')];
 
-    function setHand(element, choice) {
-        element.textContent = choice ? symbols[choice] : '?';
-        element.setAttribute('aria-label', choice ? labels[choice] : 'Todavía no hay jugada');
+    function setHand(element, choice, animate = false) {
+        const caption = element.querySelector('.hand-caption');
+
+        if (choice && element.dataset.choice === choice && element.dataset.revealed === 'true') {
+            return;
+        }
+
+        if (choice) {
+            element.dataset.choice = choice;
+            element.dataset.revealed = 'true';
+            element.setAttribute('aria-label', `Jugada: ${labels[choice]}`);
+            caption.textContent = labels[choice];
+
+            if (animate) {
+                element.classList.remove('hand-reveal');
+                void element.offsetWidth;
+                element.classList.add('hand-reveal');
+            }
+        } else {
+            delete element.dataset.choice;
+            element.dataset.revealed = 'false';
+            element.classList.remove('hand-reveal');
+            element.setAttribute('aria-label', 'Todavía no hay jugada');
+            caption.textContent = 'Esperando';
+        }
+    }
+
+    function prepareHands(...hands) {
+        hands.forEach((hand) => {
+            hand.dataset.shaking = 'true';
+            setHand(hand, null);
+        });
+    }
+
+    function revealHands(...hands) {
+        hands.forEach((hand) => {
+            delete hand.dataset.shaking;
+        });
     }
 
     function winnerOf(playerChoice, opponentChoice) {
@@ -48,43 +78,55 @@ if (mode) {
         let botPoints = 0;
         let round = 1;
         let finished = false;
+        let roundResolving = false;
 
         function playAgainstBot(playerChoice) {
-            if (finished) {
+            if (finished || roundResolving) {
                 return;
             }
 
+            roundResolving = true;
+            picker.disabled = true;
+            result.textContent = '';
+            status.textContent = '¡Listos... piedra, papel o tijera!';
+            prepareHands(playerHand, opponentHand);
             const botChoice = choices[Math.floor(Math.random() * choices.length)];
-            const winner = winnerOf(playerChoice, botChoice);
 
-            setHand(playerHand, playerChoice);
-            setHand(opponentHand, botChoice);
+            window.setTimeout(() => {
+                revealHands(playerHand, opponentHand);
+                setHand(playerHand, playerChoice, true);
+                setHand(opponentHand, botChoice, true);
+                const winner = winnerOf(playerChoice, botChoice);
 
-            if (winner === 'tu') {
-                playerPoints++;
-                status.textContent = 'Ganaste esta ronda.';
-                result.textContent = `${labels[playerChoice]} vence a ${labels[botChoice]}.`;
-            } else if (winner === 'oponente') {
-                botPoints++;
-                status.textContent = 'El bot ganó esta ronda.';
-                result.textContent = `${labels[botChoice]} vence a ${labels[playerChoice]}.`;
-            } else {
-                status.textContent = 'Empate. Esta ronda no suma puntos.';
-                result.textContent = `Ambos eligieron ${labels[playerChoice]}.`;
-            }
+                if (winner === 'tu') {
+                    playerPoints++;
+                    status.textContent = 'Ganaste esta ronda.';
+                    result.textContent = `${labels[playerChoice]} vence a ${labels[botChoice]}.`;
+                } else if (winner === 'oponente') {
+                    botPoints++;
+                    status.textContent = 'El bot ganó esta ronda.';
+                    result.textContent = `${labels[botChoice]} vence a ${labels[playerChoice]}.`;
+                } else {
+                    status.textContent = 'Empate. Esta ronda no suma puntos.';
+                    result.textContent = `Ambos eligieron ${labels[playerChoice]}.`;
+                }
 
-            playerScore.textContent = String(playerPoints);
-            opponentScore.textContent = String(botPoints);
-            round++;
-            roundLabel.textContent = `Ronda ${round}`;
+                playerScore.textContent = String(playerPoints);
+                opponentScore.textContent = String(botPoints);
+                round++;
+                roundLabel.textContent = `Ronda ${round}`;
 
-            if (playerPoints === 3 || botPoints === 3) {
-                finished = true;
-                picker.disabled = true;
-                status.textContent = playerPoints === 3 ? '¡Ganaste la partida!' : 'El bot ganó la partida.';
-                roundLabel.textContent = 'Partida finalizada';
-                playAgain.hidden = false;
-            }
+                if (playerPoints === 3 || botPoints === 3) {
+                    finished = true;
+                    status.textContent = playerPoints === 3 ? '¡Ganaste la partida!' : 'El bot ganó la partida.';
+                    roundLabel.textContent = 'Partida finalizada';
+                    playAgain.hidden = false;
+                } else {
+                    picker.disabled = false;
+                }
+
+                roundResolving = false;
+            }, 650);
         }
 
         choiceButtons.forEach((button) => {
@@ -103,6 +145,9 @@ if (mode) {
         let matchmakingRequestPending = false;
         let moveRequestPending = false;
         let echoChannel = null;
+        let lastRevealedRound = 0;
+        let isRevealingRound = false;
+        let latestState = null;
 
         function getPlayerId() {
             let id = sessionStorage.getItem('ppt-player-id');
@@ -139,10 +184,35 @@ if (mode) {
         }
 
         function renderState(state) {
+            latestState = state;
+
+            if (isRevealingRound) {
+                return;
+            }
+
             playerScore.textContent = String(state.puntos.tu);
             opponentScore.textContent = String(state.puntos.oponente);
             roundLabel.textContent = state.estado === 'finalizada' ? 'Partida finalizada' : `Ronda ${state.ronda}`;
             picker.disabled = state.estado === 'finalizada' || state.jugaste || moveRequestPending;
+
+            if (state.ultimaRonda && state.ultimaRonda.numero > lastRevealedRound) {
+                lastRevealedRound = state.ultimaRonda.numero;
+                isRevealingRound = true;
+                picker.disabled = true;
+                result.textContent = '';
+                status.textContent = '¡Listos... piedra, papel o tijera!';
+                prepareHands(playerHand, opponentHand);
+
+                window.setTimeout(() => {
+                    revealHands(playerHand, opponentHand);
+                    setHand(playerHand, state.ultimaRonda.jugadas.tu, true);
+                    setHand(opponentHand, state.ultimaRonda.jugadas.oponente, true);
+                    isRevealingRound = false;
+                    renderState(latestState);
+                }, 650);
+
+                return;
+            }
 
             if (state.jugaste || state.oponenteJugo) {
                 setHand(playerHand, state.tuJugadaActual);

@@ -219,12 +219,141 @@ body.ppt-page {
     line-height: 1;
 }
 
-.hand {
-    display: grid;
-    min-height: 45px;
-    place-items: center;
+.hand-stage {
+    display: flex;
+    width: min(100%, 150px);
+    min-height: 94px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.hand-illustration {
+    width: 100%;
+    max-height: 112px;
+    overflow: visible;
+    filter: drop-shadow(0 7px 8px rgba(0, 0, 0, .24));
+    transition: filter .2s ease;
+}
+
+.hand-caption {
+    min-height: 14px;
     color: var(--ppt-accent);
-    font-size: 34px;
+    font: 9px 'DM Mono', monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.score-card-opponent .hand-caption {
+    color: var(--ppt-green);
+}
+
+.hand-pose {
+    display: none;
+}
+
+.hand-stage[data-choice="piedra"] .hand-pose[data-pose="piedra"],
+.hand-stage[data-choice="papel"] .hand-pose[data-pose="papel"],
+.hand-stage[data-choice="tijera"] .hand-pose[data-pose="tijera"] {
+    display: initial;
+}
+
+.hand-sleeve {
+    fill: #8b79d8;
+    stroke: #514687;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+}
+
+.hand-skin {
+    fill: #f2b891;
+    stroke: #ae735f;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+}
+
+.hand-thumb {
+    fill: #ffd0a8;
+    stroke: #ae735f;
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+}
+
+.hand-crease {
+    fill: none;
+    stroke: #c98870;
+    stroke-linecap: round;
+    stroke-width: 2.5;
+}
+
+.score-card-opponent .hand-sleeve {
+    fill: #5da997;
+    stroke: #376b66;
+}
+
+.score-card-opponent .hand-skin {
+    fill: #d99c7e;
+    stroke: #98604e;
+}
+
+.score-card-opponent .hand-thumb {
+    fill: #f0b28d;
+    stroke: #98604e;
+}
+
+.score-card-opponent .hand-crease {
+    stroke: #b87860;
+}
+
+.hand-question {
+    display: none;
+    fill: var(--ppt-accent);
+    font: 700 37px 'Space Grotesk', sans-serif;
+    text-anchor: middle;
+}
+
+.hand-stage[data-revealed="false"] .hand-pose {
+    opacity: .48;
+}
+
+.hand-stage[data-revealed="false"] .hand-question {
+    display: initial;
+}
+
+.score-card-opponent .hand-question {
+    fill: var(--ppt-green);
+}
+
+.hand-stage[data-revealed="false"] .hand-caption {
+    color: var(--ppt-muted);
+}
+
+.hand-stage[data-revealed="true"][data-choice="piedra"] .hand-illustration,
+.hand-stage[data-revealed="true"][data-choice="papel"] .hand-illustration,
+.hand-stage[data-revealed="true"][data-choice="tijera"] .hand-illustration {
+    filter: drop-shadow(0 7px 12px rgba(188, 167, 255, .18));
+}
+
+.hand-stage[data-shaking="true"] .hand-illustration {
+    animation: hand-ready .2s ease-in-out 3;
+}
+
+.hand-stage.hand-reveal .hand-illustration {
+    animation: hand-reveal .55s cubic-bezier(.2, .8, .25, 1);
+}
+
+@keyframes hand-ready {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    35% { transform: translateY(-5px) rotate(-7deg); }
+    70% { transform: translateY(1px) rotate(6deg); }
+}
+
+@keyframes hand-reveal {
+    0% { transform: translateY(-17px) scale(.88) rotate(-10deg); }
+    58% { transform: translateY(5px) scale(1.06) rotate(5deg); }
+    78% { transform: translateY(-2px) scale(.98) rotate(-2deg); }
+    100% { transform: translateY(0) scale(1) rotate(0); }
 }
 
 .versus {
@@ -362,6 +491,18 @@ body.ppt-page {
         padding: 12px 8px;
     }
 
+    .hand-stage {
+        min-height: 82px;
+    }
+
+    .hand-illustration {
+        max-height: 96px;
+    }
+
+    .hand-caption {
+        font-size: 8px;
+    }
+
     .move-options {
         gap: 7px;
     }
@@ -378,5 +519,7 @@ body.ppt-page {
     *::after {
         scroll-behavior: auto !important;
         transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
     }
 }

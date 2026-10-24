@@ -12,24 +12,24 @@
         <header class="ppt-header">
             <span class="ppt-eyebrow">JUEGO CLÁSICO · DUELO EN LÍNEA</span>
             <h1>Piedra, papel<br>o tijera</h1>
-            <p>Elige cómo quieres jugar. Gana quien llegue primero a tres puntos.</p>
+            <p>Juega contra un bot o contra otra persona en línea. Gana quien llegue primero a 3 puntos.</p>
         </header>
 
         <section class="mode-grid" aria-label="Modos de juego">
             <article class="mode-card">
-                <span class="mode-number">01 · PRÁCTICA</span>
+                <span class="mode-number">Modo Individual</span>
                 <h2>En solitario</h2>
-                <p>Juega cuando quieras contra el bot. La partida se juega en este dispositivo.</p>
-                <a class="ppt-button" href="{{ route('jugador') }}">Jugar contra el bot <span aria-hidden="true">→</span></a>
+                <p>Juega cuando quieras contra un bot. La partida se juega en este dispositivo.</p>
+                <a class="ppt-button" href="{{ route('jugador') }}">Jugar contra un bot <span aria-hidden="true">→</span></a>
             </article>
             <article class="mode-card mode-card-online">
-                <span class="mode-number">02 · EN LÍNEA</span>
+                <span class="mode-number">Modo En Línea</span>
                 <h2>Contra otra persona</h2>
                 <p>Entra a la cola y te emparejaremos al azar con otra persona que esté buscando partida.</p>
                 <a class="ppt-button" href="{{ route('campana') }}">Buscar rival <span aria-hidden="true">→</span></a>
             </article>
         </section>
-        <footer class="ppt-footer">Gana quien llegue primero a 3 puntos · Las jugadas se revelan al mismo tiempo</footer>
+        <footer class="ppt-footer">Las jugadas se revelan al mismo tiempo</footer>
     </main>
 </body>
 </html>

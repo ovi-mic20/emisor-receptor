@@ -39,13 +39,59 @@
                 <div class="score-card">
                     <span id="you-label">Tú</span>
                     <strong id="you-score">0</strong>
-                    <span class="hand" id="you-hand" aria-label="Tu jugada">?</span>
+                    <div class="hand-stage" id="you-hand" data-revealed="false" aria-label="Tu jugada aún no revelada" role="img">
+                        <svg class="hand-illustration" viewBox="0 0 180 160" aria-hidden="true">
+                            <g class="hand-pose" data-pose="piedra">
+                                <path class="hand-sleeve" d="M68 120h46l8 31q-31 12-62 0z"/>
+                                <path class="hand-skin" d="M64 119c-10-4-15-11-15-21V77c0-9 7-14 15-12 4-11 17-13 24-6 9-9 23-6 27 3 9-5 20 1 19 11l-2 19c-1 13-8 22-21 28H77c-6 0-10-1-13-3z"/>
+                                <path class="hand-thumb" d="M54 91c8-7 17-7 25-2l24 3c9 1 12 12 5 17l-18 11-25-4c-12-2-18-16-11-25z"/>
+                                <path class="hand-crease" d="M62 71v15M83 63v19M107 65v17M65 105c15 5 29 6 42 2"/>
+                            </g>
+                            <g class="hand-pose" data-pose="papel">
+                                <path class="hand-sleeve" d="M70 119h45l8 32q-31 12-61 0z"/>
+                                <path class="hand-skin" d="M62 119 51 87c-3-9 2-16 10-18 7-2 13 2 16 9l3 8-7-42c-2-10 4-17 12-18 8-1 14 5 15 13l5 35-1-48c0-10 6-16 14-16s14 7 14 16l-1 50 7-37c2-9 9-14 17-12 8 2 12 9 10 18l-10 53c-3 16-13 28-29 32l-37 1c-14 0-23-5-27-19z"/>
+                                <path class="hand-thumb" d="M64 89c-10-6-20 2-17 12l8 18 22 10 9-14-13-19z"/>
+                                <path class="hand-crease" d="M85 57l4 31M111 48v40M138 61l-6 28M83 105h49"/>
+                            </g>
+                            <g class="hand-pose" data-pose="tijera">
+                                <path class="hand-sleeve" d="M71 120h45l8 31q-31 12-61 0z"/>
+                                <path class="hand-skin" d="M66 120c-8-5-12-14-11-25l4-20c1-8 8-12 15-10l-7-26c-2-9 3-16 11-18 8-2 15 3 17 11l10 38 12-43c3-9 11-13 19-10 8 3 11 11 8 19l-15 40 9-8c7-6 16-4 20 3 4 7 1 15-5 20l-16 14c-2 10-9 19-20 25l-31 1c-9 0-15-3-20-11z"/>
+                                <path class="hand-thumb" d="M62 87c-9-4-17 4-13 13l10 17 21 9 8-14-15-19z"/>
+                                <path class="hand-crease" d="M65 78l12 22M112 76l17 8M79 108h38"/>
+                            </g>
+                            <text class="hand-question" x="91" y="99">?</text>
+                        </svg>
+                        <span class="hand-caption" aria-hidden="true">?</span>
+                    </div>
                 </div>
                 <span class="versus" aria-hidden="true">:</span>
                 <div class="score-card score-card-opponent">
                     <span id="opponent-label">{{ $modo === 'solo' ? 'Bot' : 'Rival' }}</span>
                     <strong id="opponent-score">0</strong>
-                    <span class="hand" id="opponent-hand" aria-label="Jugada del rival">?</span>
+                    <div class="hand-stage" id="opponent-hand" data-revealed="false" aria-label="La jugada del rival aún no fue revelada" role="img">
+                        <svg class="hand-illustration" viewBox="0 0 180 160" aria-hidden="true">
+                            <g class="hand-pose" data-pose="piedra">
+                                <path class="hand-sleeve" d="M68 120h46l8 31q-31 12-62 0z"/>
+                                <path class="hand-skin" d="M64 119c-10-4-15-11-15-21V77c0-9 7-14 15-12 4-11 17-13 24-6 9-9 23-6 27 3 9-5 20 1 19 11l-2 19c-1 13-8 22-21 28H77c-6 0-10-1-13-3z"/>
+                                <path class="hand-thumb" d="M54 91c8-7 17-7 25-2l24 3c9 1 12 12 5 17l-18 11-25-4c-12-2-18-16-11-25z"/>
+                                <path class="hand-crease" d="M62 71v15M83 63v19M107 65v17M65 105c15 5 29 6 42 2"/>
+                            </g>
+                            <g class="hand-pose" data-pose="papel">
+                                <path class="hand-sleeve" d="M70 119h45l8 32q-31 12-61 0z"/>
+                                <path class="hand-skin" d="M62 119 51 87c-3-9 2-16 10-18 7-2 13 2 16 9l3 8-7-42c-2-10 4-17 12-18 8-1 14 5 15 13l5 35-1-48c0-10 6-16 14-16s14 7 14 16l-1 50 7-37c2-9 9-14 17-12 8 2 12 9 10 18l-10 53c-3 16-13 28-29 32l-37 1c-14 0-23-5-27-19z"/>
+                                <path class="hand-thumb" d="M64 89c-10-6-20 2-17 12l8 18 22 10 9-14-13-19z"/>
+                                <path class="hand-crease" d="M85 57l4 31M111 48v40M138 61l-6 28M83 105h49"/>
+                            </g>
+                            <g class="hand-pose" data-pose="tijera">
+                                <path class="hand-sleeve" d="M71 120h45l8 31q-31 12-61 0z"/>
+                                <path class="hand-skin" d="M66 120c-8-5-12-14-11-25l4-20c1-8 8-12 15-10l-7-26c-2-9 3-16 11-18 8-2 15 3 17 11l10 38 12-43c3-9 11-13 19-10 8 3 11 11 8 19l-15 40 9-8c7-6 16-4 20 3 4 7 1 15-5 20l-16 14c-2 10-9 19-20 25l-31 1c-9 0-15-3-20-11z"/>
+                                <path class="hand-thumb" d="M62 87c-9-4-17 4-13 13l10 17 21 9 8-14-15-19z"/>
+                                <path class="hand-crease" d="M65 78l12 22M112 76l17 8M79 108h38"/>
+                            </g>
+                            <text class="hand-question" x="91" y="99">?</text>
+                        </svg>
+                        <span class="hand-caption" aria-hidden="true">?</span>
+                    </div>
                 </div>
             </div>
 
