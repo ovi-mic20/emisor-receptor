@@ -1,0 +1,382 @@
+:root {
+    color-scheme: dark;
+    --ppt-bg: #10121a;
+    --ppt-panel: rgba(25, 29, 42, .9);
+    --ppt-line: rgba(227, 229, 255, .13);
+    --ppt-text: #f5f3ff;
+    --ppt-muted: #a9acc1;
+    --ppt-accent: #bca7ff;
+    --ppt-green: #9be3c2;
+}
+
+body.ppt-page {
+    display: grid;
+    min-height: 100svh;
+    margin: 0;
+    padding: 28px 18px;
+    place-items: center;
+    background:
+        radial-gradient(ellipse at 15% 18%, rgba(109, 92, 179, .2), transparent 40%),
+        radial-gradient(ellipse at 88% 84%, rgba(46, 135, 115, .14), transparent 38%),
+        var(--ppt-bg);
+    color: var(--ppt-text);
+    font-family: 'Space Grotesk', ui-sans-serif, sans-serif;
+}
+
+.ppt-shell {
+    width: min(100%, 920px);
+    margin: auto;
+}
+
+.ppt-header {
+    max-width: 690px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.ppt-eyebrow,
+.mode-number {
+    color: var(--ppt-accent);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.ppt-header h1 {
+    margin: 17px 0 12px;
+    font-size: clamp(42px, 8vw, 76px);
+    letter-spacing: -.065em;
+    line-height: .98;
+}
+
+.ppt-header p {
+    margin: 0;
+    color: var(--ppt-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.mode-card,
+.game-card {
+    border: 1px solid var(--ppt-line);
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(30, 35, 51, .96), rgba(20, 23, 34, .96));
+    box-shadow: 0 22px 70px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .035);
+}
+
+.mode-card {
+    display: flex;
+    min-height: 250px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 26px;
+}
+
+.mode-card-online {
+    border-color: rgba(155, 227, 194, .24);
+}
+
+.mode-card h2 {
+    margin: 25px 0 8px;
+    font-size: 26px;
+    letter-spacing: -.04em;
+}
+
+.mode-card p {
+    margin: 0 0 25px;
+    color: var(--ppt-muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.ppt-button {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: auto;
+    padding: 0 17px;
+    border: 1px solid var(--ppt-accent);
+    border-radius: 9px;
+    background: rgba(188, 167, 255, .12);
+    color: var(--ppt-text);
+    cursor: pointer;
+    font: 500 13px 'Space Grotesk', sans-serif;
+    text-decoration: none;
+    transition: background .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+.ppt-button:hover,
+.ppt-button:focus-visible {
+    transform: translateY(-1px);
+    background: rgba(188, 167, 255, .2);
+    outline: none;
+}
+
+.mode-card-online .ppt-button {
+    border-color: var(--ppt-green);
+    background: rgba(155, 227, 194, .1);
+}
+
+.mode-card-online .ppt-button:hover,
+.mode-card-online .ppt-button:focus-visible {
+    background: rgba(155, 227, 194, .19);
+}
+
+.ppt-footer {
+    margin: 20px 0 0;
+    color: var(--ppt-muted);
+    font: 10px 'DM Mono', monospace;
+    text-align: center;
+}
+
+.game-shell {
+    width: min(100%, 700px);
+}
+
+.game-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.back-link {
+    color: var(--ppt-muted);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+    color: var(--ppt-text);
+}
+
+.game-card {
+    padding: clamp(22px, 5vw, 38px);
+}
+
+.game-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.game-heading h1 {
+    margin: 8px 0 0;
+    font-size: clamp(28px, 6vw, 42px);
+    letter-spacing: -.055em;
+}
+
+.round-pill {
+    flex: 0 0 auto;
+    padding: 8px 11px;
+    border: 1px solid var(--ppt-line);
+    border-radius: 99px;
+    color: var(--ppt-muted);
+    font: 10px 'DM Mono', monospace;
+}
+
+.game-status {
+    min-height: 26px;
+    margin: 20px 0;
+    color: var(--ppt-green);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.scoreboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+}
+
+.score-card {
+    display: grid;
+    min-height: 154px;
+    padding: 15px;
+    place-items: center;
+    border: 1px solid var(--ppt-line);
+    border-radius: 12px;
+    background: rgba(8, 10, 17, .23);
+    color: var(--ppt-muted);
+    font-size: 12px;
+}
+
+.score-card strong {
+    color: var(--ppt-text);
+    font-size: 32px;
+    line-height: 1;
+}
+
+.hand {
+    display: grid;
+    min-height: 45px;
+    place-items: center;
+    color: var(--ppt-accent);
+    font-size: 34px;
+}
+
+.versus {
+    color: var(--ppt-muted);
+    font: 11px 'DM Mono', monospace;
+    text-align: center;
+}
+
+.round-result {
+    min-height: 25px;
+    margin: 16px 0 22px;
+    color: var(--ppt-muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+.move-picker {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.move-picker legend {
+    width: 100%;
+    margin-bottom: 12px;
+    color: var(--ppt-muted);
+    font: 10px 'DM Mono', monospace;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.move-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.move-button {
+    display: grid;
+    min-height: 94px;
+    gap: 5px;
+    place-content: center;
+    border: 1px solid var(--ppt-line);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, .025);
+    color: var(--ppt-text);
+    cursor: pointer;
+    font: 12px 'Space Grotesk', sans-serif;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+.move-button:hover,
+.move-button:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--ppt-accent);
+    background: rgba(188, 167, 255, .1);
+    outline: none;
+}
+
+.move-button:disabled {
+    cursor: not-allowed;
+    opacity: .48;
+}
+
+.move-symbol {
+    font-size: 29px;
+}
+
+.game-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+}
+
+.ppt-button-secondary {
+    border-color: var(--ppt-line);
+    background: transparent;
+}
+
+.ppt-button[hidden] {
+    display: none;
+}
+
+.game-note {
+    margin: 18px 0 0;
+    color: var(--ppt-muted);
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media (max-width: 620px) {
+    body.ppt-page {
+        padding: 20px 14px;
+    }
+
+    .ppt-header {
+        margin-bottom: 24px;
+    }
+
+    .ppt-header p {
+        font-size: 13px;
+    }
+
+    .mode-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mode-card {
+        min-height: 210px;
+        padding: 21px;
+    }
+
+    .mode-card h2 {
+        margin-top: 17px;
+        font-size: 23px;
+    }
+
+    .mode-card p {
+        font-size: 13px;
+    }
+
+    .ppt-footer {
+        font-size: 9px;
+        line-height: 1.7;
+    }
+
+    .game-card {
+        padding: 21px 16px;
+    }
+
+    .score-card {
+        min-height: 132px;
+        padding: 12px 8px;
+    }
+
+    .move-options {
+        gap: 7px;
+    }
+
+    .move-button {
+        min-height: 86px;
+        font-size: 11px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}

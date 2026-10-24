@@ -9,8 +9,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/css/campana.css',
-                'resources/js/campana.js',
+                'resources/css/ppt.css',
+                'resources/js/ppt.js',
             ],
             refresh: true,
             fonts: [
